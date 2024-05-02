@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { ApplicationError } from "../../errorHandler/errorHandler.middleware.js";
-import userSchema from "./user.schema.js";
+import { userSchema } from "./user.schema.js";
 
 // creating model using schema
 const UserModel = mongoose.model("User", userSchema);
