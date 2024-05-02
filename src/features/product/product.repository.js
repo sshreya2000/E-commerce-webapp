@@ -4,6 +4,7 @@ import { ApplicationError } from "../../errorHandler/errorHandler.middleware.js"
 import { productSchema } from "./product.schema.js";
 import { reviewSchema } from "./review.schema.js";
 import { categorySchema } from "./category.schema.js";
+import mongoose from "mongoose";
 
 const ProductModel = mongoose.model("Product", productSchema);
 const ReviewModel = mongoose.model("Review", reviewSchema);
