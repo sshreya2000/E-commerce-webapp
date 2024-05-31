@@ -8,7 +8,7 @@ import bodyParser from "body-parser";
 import { basicAuthorizer } from "./src/middlewares/basicAuth.middleware.js";
 import { jwtAuthorizer } from "./src/middlewares/jwtAuth.middleware.js";
 import cartRouter from "./src/features/cart/cartItems.routes.js";
-import apiDocs from "./swagger.json" assert { type: "json" };
+import apiDocs from "./swagger.json";
 import { connectToMongoDB } from "./src/config/mongodb.js";
 import errorHandlerMiddleware from "./src/errorHandler/errorHandler.middleware.js";
 import orderRouter from "./src/features/order/order.routes.js";
