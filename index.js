@@ -8,18 +8,19 @@ import bodyParser from "body-parser";
 import { basicAuthorizer } from "./src/middlewares/basicAuth.middleware.js";
 import { jwtAuthorizer } from "./src/middlewares/jwtAuth.middleware.js";
 import cartRouter from "./src/features/cart/cartItems.routes.js";
-import apiDocs from "./swagger.json";
+import { definition } from "./swagger.js";
 import { connectToMongoDB } from "./src/config/mongodb.js";
 import errorHandlerMiddleware from "./src/errorHandler/errorHandler.middleware.js";
 import orderRouter from "./src/features/order/order.routes.js";
 import { connectToMongooseMongoDB } from "./src/config/mongoConfig.js";
+import swaggerJSDoc from "swagger-jsdoc";
 
 // create server
 const app = express();
 
 // to parse req bod to post correctly
 app.use(bodyParser.json());
-app.use("/api-docs", swagger.serve, swagger.setup(apiDocs));
+
 // for all requests related to product, redirect to product routes.
 // localhost:4000/api/products
 app.use("/api/products", jwtAuthorizer, ProductRouter);
@@ -27,6 +28,12 @@ app.use("/api/cartItems", jwtAuthorizer, cartRouter);
 app.use("/api/orders", jwtAuthorizer, orderRouter);
 app.use("/api/users", userRouter);
 
+const options = {
+  definition,
+  apis: ["./api/*.js"],
+};
+const specs = swaggerJSDoc(options);
+app.use("/api-docs", swagger.serve, swagger.setup(specs));
 // default request handler
 app.get("/", (req, res) => {
   res.send("Welcome to ecommerce app");
