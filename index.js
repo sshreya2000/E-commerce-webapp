@@ -14,13 +14,14 @@ import errorHandlerMiddleware from "./src/errorHandler/errorHandler.middleware.j
 import orderRouter from "./src/features/order/order.routes.js";
 import { connectToMongooseMongoDB } from "./src/config/mongoConfig.js";
 import swaggerJSDoc from "swagger-jsdoc";
+import cors from "cors";
 
 // create server
 const app = express();
 
 // to parse req bod to post correctly
 app.use(bodyParser.json());
-
+app.use(cors());
 // for all requests related to product, redirect to product routes.
 // localhost:4000/api/products
 app.use("/api/products", jwtAuthorizer, ProductRouter);
